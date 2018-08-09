@@ -1,0 +1,3 @@
+Debian: sources.list -> /etc/apt/sources.list
+PyPI: pip.conf -> /etc/pip.conf
+Maven: settings.xml -> /etc/maven/settings.xml
