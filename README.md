@@ -1,10 +1,13 @@
-# nexus-proxy-local-repo
+# Proxy repository manager 
+This project allows you to mirror [apt](https://wiki.debian.org/DebianRepository), [PyPI](https://pypi.org/) and [Maven](https://mvnrepository.com/) repositories in your local server programmatically. Preconfigured container downloads software packages via [Nexus](https://help.sonatype.com/repomanager3). You may configure which packages or how many packages will be downloaded or you may automate the process with a CI tool.
+
+![Diagram](https://github.com/sulunemre/nexus-proxy-local-repo/blob/master/screenshots/diagram.png)
 
 ## Getting Started
 ### Prerequisites
 You need Docker to run the project. The following instructions are tested on Debian.
 ### Configure Nexus
-Create proxy repos on Nexus according to the following configuration.
+Create proxy repos on Nexus according to the following configuration. You may install Nexus as a Docker container, just follow the [instructions](https://github.com/sonatype-nexus-community/nexus-repository-apt).
 #### Debian apt package manager
 ![Debian](https://github.com/sulunemre/nexus-proxy-local-repo/blob/master/screenshots/debian.PNG)
 #### PyPI
@@ -12,7 +15,7 @@ Create proxy repos on Nexus according to the following configuration.
 #### Maven
 ![Maven](https://github.com/sulunemre/nexus-proxy-local-repo/blob/master/screenshots/maven.PNG)
 
-Then, change the IP addresses in the each file in ```configFiles``` directory with your URLs.
+Then, change the IP addresses in each file in ```configFiles``` directory with your URLs.
 ### Build
 * After cloning the project, change directory to the folder in which ```Dockerfile``` exists.
 * Build a docker image:
@@ -50,4 +53,7 @@ python mavenDownloadMetadata.py && \
 chmod +x mavenInstallPackages.sh && \
 ./mavenInstallPackages.sh 
 ```
-* ```mavenDownloadMetadata.py``` script downloads 
+* ```mavenDownloadMetadata.py``` script downloads the names of Maven packages in the format of ```groupId:artifactId:version``` and writes them to ```mavenAllPackagesList.txt```. By default, artifacts in ```ant``` [group](https://repo1.maven.org/maven2/ant/) are downloaded but you can change the group (or use all repo but it is too slow) in the script.
+
+## Contributing
+You may add new repositories or improve the existing ones.
